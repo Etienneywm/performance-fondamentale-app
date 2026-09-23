@@ -3,10 +3,10 @@
    ============================================================ */
 
 /** URL de déploiement de ton Apps Script (Web app). Vide = envoi simulé (console). */
-export const SHEET_ENDPOINT = '';
+export const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw62mTnZyV3tPSvpxNAP2KmCltDzAs0JwcsrhmeFzgpxJ4TH3HoLW13r8icypW6TYZP/exec';
 
 /** Lien vers le Google Sheet du coaché (journal de sommeil). */
-export const SHEET_URL = 'https://docs.google.com/spreadsheets/';
+export const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1bc7DQU0SyiFgIcTSlvMGkyOqFiE9rJESGU0sIfYkjt0/edit';
 
 export const PRENOM = 'Camille';
 
