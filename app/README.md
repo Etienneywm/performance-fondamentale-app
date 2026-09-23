@@ -11,7 +11,7 @@ cd app
 npm install
 npm run dev       # http://localhost:5173
 npm test          # tests de la logique (dates, check-in, graphiques)
-npm run build     # génère dist/, à héberger tel quel (Netlify, Vercel, GitHub Pages…)
+npm run build     # génère dist/
 ```
 
 ## Configurer un coaché — `src/config.ts`
@@ -35,17 +35,12 @@ Chaque envoi fait un `POST` avec le corps `{ sheet, row }` (en `text/plain`, pou
 - `Pratiques` : quand une pratique est cochée (ou l'audio écouté jusqu'au bout), et quand une vidéo est marquée comme vue.
 - `Scores & Prescriptions` : quand tu cliques sur « Enregistrer mes scores ».
 
-Exemple minimal côté Apps Script :
+Le script à installer dans le Google Sheet, avec son guide pas à pas, est dans [`google-sheet/`](../google-sheet/README.md).
 
-```js
-function doPost(e) {
-  const { sheet, row } = JSON.parse(e.postData.contents);
-  const sh = SpreadsheetApp.getActive().getSheetByName(sheet);
-  const headers = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
-  sh.appendRow(headers.map((h) => row[h] ?? ''));
-  return ContentService.createTextOutput('ok');
-}
-```
+## Mise en ligne
+
+Chaque modification de `main` publie automatiquement l'app sur GitHub Pages (`.github/workflows/deploy.yml`) :
+https://etienneywm.github.io/performance-fondamentale-app/
 
 ## Données locales
 
