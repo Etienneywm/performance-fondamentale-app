@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0;background:#f5f4f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#6300FF}a:hover{color:#4B00C2}button{font-family:inherit}input::placeholder{color:#bbbbbb}</style></helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px">
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ darkStatus }}" hint-size="402px,874px">
+<div style="position:absolute;inset:0;background:#faf9f5;color:#16012E;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',sans-serif;overflow:hidden">
+
+<div ref="{{ scrollRef }}" style="position:absolute;inset:0;overflow-y:auto;padding-bottom:{{ scrollPad }}">
+
+<!-- ACCUEIL -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+
+<sc-if value="{{ isCreme }}" hint-placeholder-val="{{ true }}">
+<div style="padding:66px 20px 0;display:flex;flex-direction:column;gap:12px">
+<div style="font-size: 15px; color: #555555; text-align: center">{{ dateLabel }} · Session {{ session }}</div>
+<div style="font-size: 36px; line-height: 1.15; font-weight: 300; letter-spacing: -0.5px; text-align: center">Bonjour {{ prenom }}</div>
+<div style="align-self:flex-start;display:flex;align-items:center;gap:8px;background:#F0EBFF;color:#4B00C2;border-radius:100px;padding:9px 16px;font-size:14px;font-weight:500;line-height:1.3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; flex: none; stroke: #A300C2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle></svg><span>{{ objectif }}</span></div>
+<sc-if value="{{ consultDay }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:8px;background:#F0EBFF;border-radius:16px;padding:24px 20px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6300FF">Jour de consultation</div>
+<div style="font-size:21px;line-height:1.4;font-weight:300;letter-spacing:-0.3px;color:#16012E;text-wrap:pretty">C'est le moment de mesurer tes scores.</div>
+<button onClick="{{ goScores }}" style="min-height:48px;padding:14px 32px;border:none;border-radius:100px;background:#6300FF;color:#ffffff;font-size:14px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer" style-hover="background:#4B00C2">Remplir mes scores</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isEncre }}" hint-placeholder-val="{{ false }}">
+<div style="background:linear-gradient(180deg,#1E0838 0%,#16012E 100%);border-radius:0 0 20px 20px;padding:66px 20px 28px;display:flex;flex-direction:column;gap:12px;color:#faf9f5">
+<div style="font-size:15px;color:#BDB3D0">{{ dateLabel }} · Session {{ session }}</div>
+<div style="font-size:36px;line-height:1.15;font-weight:300;letter-spacing:-0.5px;color:#faf9f5">Bonjour {{ prenom }}</div>
+<div style="align-self:flex-start;display:flex;align-items:center;gap:8px;border:1px solid rgba(250,249,245,0.25);color:#faf9f5;border-radius:100px;padding:9px 16px;font-size:14px;font-weight:500;line-height:1.3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D9C6FF" style="stroke-width:2;flex:none"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle></svg><span>{{ objectif }}</span></div>
+<sc-if value="{{ consultDay }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:12px;padding-top:20px;border-top:1px solid rgba(250,249,245,0.25);display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#D9C6FF">Jour de consultation</div>
+<div style="font-size:21px;line-height:1.4;font-weight:300;letter-spacing:-0.3px;color:#faf9f5">C'est le moment de mesurer tes scores.</div>
+<button onClick="{{ goScores }}" style="min-height:48px;padding:14px 32px;border:none;border-radius:100px;background:#6300FF;color:#ffffff;font-size:14px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(99,0,255,0.25)" style-hover="background:#4B00C2">Remplir mes scores</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<div style="padding:0 20px;display:flex;flex-direction:column;gap:20px">
+<!-- Check-in -->
+<div style="background:{{ cardBg }};border:{{ cardBorder }};border-radius:20px;padding:22px 16px 18px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 4px">
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:19px;font-weight:600;line-height:1.3">Check-in du matin</div><div style="font-size:15px;color:#555555;line-height:1.4">Comment tu te sens ce matin ?</div></div>
+<div style="flex:none;padding:6px 12px;border-radius:100px;font-size:14px;font-weight:500;background:{{ ciChipBg }};color:{{ ciChipFg }}">{{ ciStatus }}</div>
+</div>
+<sc-for list="{{ scales }}" as="s" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 4px"><span style="font-size:16px;font-weight:500">{{ s.label }}</span><span style="font-size:14px;color:#555555">{{ s.valTxt }}</span></div>
+<div style="display:flex;gap:2px">
+<sc-for list="{{ s.dots }}" as="d" hint-placeholder-count="7"><button onClick="{{ d.onClick }}" aria-label="{{ d.aria }}" style="flex:1;height:44px;padding:0;border:none;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;background:{{ d.bg }};color:{{ d.fg }};border:{{ d.bd }};box-shadow:{{ d.sh }};transition:all .25s ease">{{ d.n }}</span></button></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;padding:0 4px;font-size:14px;color:#555555"><span>{{ s.lo }}</span><span>{{ s.hi }}</span></div>
+</div>
+</sc-for>
+<button onClick="{{ openSheet }}" style="min-height:48px;border-radius:100px;border:1px solid #e8e7e3;background:#faf9f5;color:#16012E;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px" style-hover="border-color:#6300FF;color:#6300FF">Compléter mon journal de sommeil <span aria-hidden="true">↗</span></button>
+</div>
+
+<!-- Pratiques -->
+<div style="background:{{ cardBg }};border:{{ cardBorder }};border-radius:20px;padding:22px 20px 10px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:19px;font-weight:600;line-height:1.3">Tes pratiques du jour</div><div style="font-size:14px;color:#555555;font-weight:500">{{ practiceLabel }}</div></div>
+<div style="height:6px;border-radius:100px;background:#f5f4f1;overflow:hidden"><div style="height:100%;width:{{ practicePct }};background:#6300FF;border-radius:100px;transition:width .25s ease"></div></div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ practices }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-top:{{ p.sep }}">
+<button onClick="{{ p.onToggle }}" aria-label="Marquer {{ p.title }} comme fait" style="flex:none;width:44px;height:44px;margin-left:-10px;border:none;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:{{ p.boxBg }};border:{{ p.boxBd }};transition:all .25s ease"><sc-if value="{{ p.done }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" style="stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></span></button>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><div style="font-size:16px;font-weight:500;line-height:1.35;color:{{ p.titleColor }};text-decoration:{{ p.deco }}">{{ p.title }}</div><div style="font-size:14px;color:#555555">{{ p.meta }}</div></div>
+<button onClick="{{ p.onPlay }}" aria-label="Écouter {{ p.title }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:#F0EBFF;color:#6300FF;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#D9C6FF"><sc-if value="{{ p.isPlaying }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg></sc-if><sc-if value="{{ p.notPlaying }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if></button>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- À regarder -->
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6300FF;padding:0 4px">À regarder</div>
+<button onClick="{{ openWatch }}" style="text-align:left;padding:0;background:{{ cardBg }};border:{{ cardBorder }};border-radius:20px;overflow:hidden;cursor:pointer;color:#16012E;display:flex;flex-direction:column" style-hover="border-color:#6300FF;box-shadow:0 4px 16px rgba(99,0,255,0.10)">
+<div style="width:100%;aspect-ratio:16/9;background:{{ watch.bg }};color:{{ watch.fg }};display:flex;align-items:center;justify-content:center;position:relative"><span style="width:64px;height:64px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg></span><span style="position:absolute;right:12px;bottom:12px;background:rgba(22,1,46,0.8);color:#faf9f5;font-size:14px;font-weight:500;padding:4px 10px;border-radius:100px">{{ watch.min }} min</span></div>
+<div style="padding:16px 20px 20px;display:flex;flex-direction:column;gap:4px"><div style="font-size:14px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#6300FF">{{ watch.theme }}</div><div style="font-size:19px;font-weight:600;line-height:1.3">{{ watch.title }}</div><div style="font-size:14px;color:#555555">Vidéo · {{ watch.min }} min{{ watch.doneTxt }}</div></div>
+</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- JOURNAL -->
+<sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+<div style="padding:66px 20px 0;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:36px;line-height:1.2;font-weight:300;letter-spacing:-0.5px">Journal</div><div style="font-size:16px;color:#555555;line-height:1.5">Ton suivi, session après session.</div></div>
+
+<div style="background:#ffffff;border:{{ scoresBorder }};border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="font-size:19px;font-weight:600;line-height:1.3">Tes scores · session {{ session }}</div><sc-if value="{{ scoresSaved }}"><div style="flex:none;padding:6px 12px;border-radius:100px;font-size:14px;font-weight:500;background:#F0EBFF;color:#4B00C2">Enregistré ✓</div></sc-if></div>
+<sc-if value="{{ consultDay }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font-size:15px;color:#555555;line-height:1.5">Installe-toi au calme, assis·e. Chronomètre en secondes.</div>
+<sc-for list="{{ scoreFields }}" as="f" hint-placeholder-count="3">
+<label style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#555555;font-weight:500">{{ f.label }}</span><span style="font-size:14px;color:#555555">{{ f.prev }}</span></div>
+<div style="position:relative"><input type="text" inputMode="decimal" placeholder="0" value="{{ f.value }}" onChange="{{ f.onChange }}" style="width:100%;height:52px;font-family:inherit;font-size:18px;font-weight:400;color:#16012E;background:#faf9f5;border:1px solid #e8e7e3;border-radius:10px;padding:0 44px 0 14px;outline:none" style-focus="border-color:#6300FF;box-shadow:0 0 0 3px rgba(99,0,255,0.10)"><span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:16px;color:#555555;pointer-events:none">s</span></div>
+<div style="font-size:14px;color:#555555;line-height:1.5;text-wrap:pretty">{{ f.help }}</div>
+</label>
+</sc-for>
+<button onClick="{{ saveScores }}" style="min-height:52px;border:none;border-radius:100px;background:#6300FF;color:#ffffff;font-size:14px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer" style-hover="background:#4B00C2;box-shadow:0 8px 24px rgba(99,0,255,0.22)">Enregistrer mes scores</button>
+</div>
+</sc-if>
+<sc-if value="{{ notConsultDay }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;color:#555555;line-height:1.6">Tu mesureras tes scores le jour de ta prochaine consultation. D'ici là, continue tes pratiques.</div></sc-if>
+</div>
+
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6300FF;padding:4px 4px 0">Ta progression</div>
+<sc-for list="{{ charts }}" as="c" hint-placeholder-count="3">
+<div style="background:#ffffff;border:1px solid #e8e7e3;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><div style="font-size:17px;font-weight:600">{{ c.name }}</div><div style="display:flex;align-items:center;gap:6px;font-size:14px;color:#555555"><span style="width:16px;border-top:1.5px dashed #4B00C2"></span>{{ c.goalTxt }}</div></div>
+<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><div style="font-size:42px;font-weight:300;letter-spacing:-1px;line-height:1.1;color:#6300FF">{{ c.latestTxt }}<span style="font-size:18px;letter-spacing:0;margin-left:3px">s</span></div><div style="padding:5px 11px;border-radius:100px;font-size:14px;font-weight:500;background:{{ c.deltaBg }};color:{{ c.deltaFg }}">{{ c.deltaTxt }}</div></div>
+<div style="position:relative;height:130px;margin-top:22px;border-bottom:1px solid #e8e7e3;display:flex">
+<div style="position:absolute;left:0;right:0;bottom:{{ c.goalBottom }};border-top:1.5px dashed #4B00C2;z-index:1"></div>
+<sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="8"><div style="flex:1;position:relative;height:100%"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:22px;height:{{ b.h }};background:{{ b.bg }};border-radius:4px 4px 0 0;transition:height .4s ease"></div><div style="position:absolute;left:0;right:0;text-align:center;bottom:calc({{ b.h }} + 4px);font-size:14px;font-weight:600;color:#6300FF">{{ b.val }}</div></div></sc-for>
+</div>
+<div style="display:flex;margin-top:-6px"><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="8"><div style="flex:1;text-align:center;font-size:14px;color:{{ b.lc }};font-weight:{{ b.lw }}">{{ b.label }}</div></sc-for></div>
+</div>
+</sc-for>
+
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6300FF;padding:4px 4px 0">Ton ressenti · 7 derniers jours</div>
+<div style="background:#ffffff;border:1px solid #e8e7e3;border-radius:20px;padding:6px 20px">
+<sc-for list="{{ feel }}" as="f" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-top:{{ f.sep }}">
+<div style="width:104px;flex:none;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;font-weight:500">{{ f.label }}</div><div style="font-size:14px;color:#555555">moy. <span style="color:#6300FF;font-weight:600">{{ f.avg }}</span>/7</div><div style="font-size:14px;color:#555555">{{ f.note }}</div></div>
+<div style="flex:1;display:flex;gap:4px">
+<sc-for list="{{ f.bars }}" as="b" hint-placeholder-count="7"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="height:52px;width:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:14px;height:{{ b.h }};background:{{ b.bg }};border-radius:4px"></div></div><div style="font-size:14px;color:{{ b.lc }};font-weight:{{ b.lw }}">{{ b.day }}</div></div></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="background:#f5f0e8;border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:19px;font-weight:600;line-height:1.3">Journal de sommeil</div>
+<div style="font-size:15px;color:#555555;line-height:1.6">Tes nuits se notent dans ton tableau de suivi.</div>
+<button onClick="{{ openSheet }}" style="min-height:48px;border-radius:100px;border:none;background:#16012E;color:#faf9f5;font-size:15px;font-weight:400;cursor:pointer" style-hover="opacity:.85">Ouvrir dans Google Sheet ↗</button>
+</div>
+</div>
+</sc-if>
+
+<!-- BIBLIOTHÈQUE -->
+<sc-if value="{{ isLib }}" hint-placeholder-val="{{ false }}">
+<div style="padding:66px 0 0;display:flex;flex-direction:column;gap:16px">
+<div style="padding:0 20px;display:flex;flex-direction:column;gap:4px"><div style="font-size:36px;line-height:1.2;font-weight:300;letter-spacing:-0.5px">Bibliothèque</div><div style="font-size:16px;color:#555555;line-height:1.5">Tes vidéos et audios, à ton rythme.</div></div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding:0 20px 4px;scrollbar-width:none">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.onClick }}" style="flex:none;min-height:44px;padding:0 18px;border-radius:100px;font-size:15px;font-weight:500;cursor:pointer;background:{{ f.bg }};color:{{ f.fg }};border:{{ f.bd }};transition:all .25s ease">{{ f.label }}</button></sc-for>
+</div>
+<div style="padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<sc-for list="{{ libItems }}" as="l" hint-placeholder-count="6">
+<button onClick="{{ l.onOpen }}" style="text-align:left;padding:0;background:#ffffff;border:1px solid #e8e7e3;border-radius:16px;overflow:hidden;cursor:pointer;color:#16012E;display:flex;flex-direction:column" style-hover="border-color:#6300FF;box-shadow:0 4px 16px rgba(99,0,255,0.10)">
+<div style="width:100%;aspect-ratio:4/3;background:{{ l.bg }};color:{{ l.fg }};display:flex;align-items:center;justify-content:center;position:relative">
+<span style="width:48px;height:48px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ l.isVideo }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if>
+<sc-if value="{{ l.isAudio }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"></path></svg></sc-if>
+</span>
+<sc-if value="{{ l.done }}"><span style="position:absolute;top:10px;right:10px;background:#ffffff;color:#4B00C2;font-size:14px;font-weight:500;padding:3px 10px;border-radius:100px">fait ✓</span></sc-if>
+</div>
+<div style="padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px">
+<div style="font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#6300FF">{{ l.theme }}</div>
+<div style="font-size:16px;font-weight:500;line-height:1.3">{{ l.title }}</div>
+<div style="font-size:14px;color:#555555">{{ l.meta }}</div>
+</div>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- PROFIL -->
+<sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+<div style="padding:66px 20px 0;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 0 4px">
+<div style="width:96px;height:96px;border-radius:50%;background:#F0EBFF;color:#6300FF;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:300">{{ initial }}</div>
+<div style="font-size:28px;font-weight:300;letter-spacing:-0.5px">{{ prenom }}</div>
+<div style="font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#16012E">Performance <span style="color:#6300FF">Fondamentale</span></div>
+</div>
+<div style="background:#ffffff;border:1px solid #e8e7e3;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:17px;font-weight:600">Session {{ session }}/8</span><span style="font-size:14px;color:#555555">{{ sessionsLeft }}</span></div>
+<div style="display:flex;gap:4px"><sc-for list="{{ sessionDots }}" as="d" hint-placeholder-count="8"><div style="flex:1;height:6px;border-radius:4px;background:{{ d.bg }}"></div></sc-for></div>
+</div>
+<div style="background:#ffffff;border:1px solid #e8e7e3;border-radius:20px;padding:18px 20px;display:flex;align-items:center;gap:14px">
+<span style="flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #6300FF;color:#6300FF;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.5"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M4 9h16M4 15h16M10 3v18"></path></svg></span>
+<div style="flex:1;display:flex;flex-direction:column;gap:2px"><div style="font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#555555">Tableau de suivi</div><div style="font-size:16px;font-weight:500;display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#6300FF;box-shadow:0 0 0 4px rgba(99,0,255,0.15)"></span>Google Sheet connecté</div></div>
+</div>
+<div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6300FF;padding:4px 4px 0">Rappels</div>
+<div style="background:#ffffff;border:1px solid #e8e7e3;border-radius:20px;padding:4px 20px">
+<sc-for list="{{ reminders }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:{{ r.sep }}">
+<div style="flex:1;display:flex;flex-direction:column;gap:1px"><div style="font-size:16px;font-weight:500">{{ r.label }}</div><div style="font-size:14px;color:#555555">{{ r.time }}</div></div>
+<button onClick="{{ r.onToggle }}" role="switch" aria-checked="{{ r.on }}" aria-label="{{ r.label }}" style="flex:none;width:56px;height:44px;border:none;background:none;padding:0;display:flex;align-items:center;cursor:pointer"><span style="width:51px;height:31px;border-radius:100px;background:{{ r.track }};position:relative;transition:background .25s ease"><span style="position:absolute;top:2px;left:{{ r.knob }};width:27px;height:27px;border-radius:50%;background:#ffffff;box-shadow:0 2px 6px rgba(22,1,46,0.15);transition:left .25s ease"></span></span></button>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<!-- Mini-lecteur -->
+<sc-if value="{{ playerShow }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:10px;right:10px;bottom:91px;z-index:30;background:#16012E;color:#faf9f5;border-radius:16px;box-shadow:0 8px 40px rgba(22,1,46,0.12);overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;padding:10px 8px 10px 16px">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><div style="font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ player.title }}</div><div style="font-size:14px;color:#BDB3D0">{{ player.time }}</div></div>
+<button onClick="{{ playerToggle }}" aria-label="Lecture / pause" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:#6300FF;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer"><sc-if value="{{ player.playing }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg></sc-if><sc-if value="{{ player.paused }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg></sc-if></button>
+<button onClick="{{ playerClose }}" aria-label="Fermer le lecteur" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:none;color:#BDB3D0;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="height:3px;background:rgba(250,249,245,0.25)"><div style="height:100%;width:{{ player.pct }};background:#D9C6FF"></div></div>
+</div>
+</sc-if>
+
+<!-- Barre d'onglets -->
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:40;height:83px;padding-bottom:30px;display:flex;background:rgba(250,249,245,0.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #e8e7e3">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.onClick }}" style="flex:1;border:none;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:{{ t.color }};padding:4px 0 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><path d="{{ t.d }}"></path></svg><span style="font-size:14px;font-weight:{{ t.fw }}">{{ t.label }}</span></button></sc-for>
+</div>
+
+<!-- Lecteur vidéo plein écran -->
+<sc-if value="{{ videoShow }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;z-index:70;background:#16012E;color:#faf9f5;display:flex;flex-direction:column;padding:62px 20px 40px;gap:20px">
+<div style="display:flex;justify-content:flex-end"><button onClick="{{ videoClose }}" aria-label="Fermer la vidéo" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(250,249,245,0.25);background:none;color:#faf9f5;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px">
+<div style="width:100%;aspect-ratio:16/9;border-radius:16px;background:#1E0838;border:1px solid rgba(250,249,245,0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#D9C6FF"><span style="width:72px;height:72px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg></span><span style="font-size:14px;color:#BDB3D0">Lecteur vidéo · {{ video.min }} min</span></div>
+<div style="height:3px;border-radius:100px;background:rgba(250,249,245,0.25)"><div style="width:0%;height:100%;background:#6300FF"></div></div>
+<div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#D9C6FF">{{ video.theme }}</div><div style="font-size:28px;font-weight:300;line-height:1.3;letter-spacing:-0.3px">{{ video.title }}</div></div>
+</div>
+<button onClick="{{ videoDone }}" style="min-height:52px;border:none;border-radius:100px;background:#6300FF;color:#ffffff;font-size:14px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer">{{ video.cta }}</button>
+</div>
+</sc-if>
+
+<!-- Toast -->
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:80;background:#16012E;color:#faf9f5;border-radius:100px;padding:12px 20px;font-size:15px;font-weight:500;white-space:nowrap;box-shadow:0 8px 24px rgba(99,0,255,0.25)" role="status">{{ toastMsg }}</div>
+</sc-if>
+
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;prenom&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Camille&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;homeVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Crème&quot;,&quot;Encre&quot;],&quot;default&quot;:&quot;Crème&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;consultDay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;session&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:1,&quot;max&quot;:8,&quot;tsType&quot;:&quot;number&quot;},&quot;objectif&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Restaurer le sommeil + respiration fonctionnelle&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  // ⚙️ URL de déploiement de ton Apps Script (Web app). Vide = envoi simulé.
+  static SHEET_ENDPOINT = '';
+  // Lien vers le Google Sheet du coaché (journal de sommeil)
+  static SHEET_URL = 'https://docs.google.com/spreadsheets/';
+  static KEY = 'pf-coache-v1';
+  static LIB = [
+    { id: 'l1', type: 'video', theme: 'Respiration', title: 'Pourquoi respirer par le nez', min: 8 },
+    { id: 'l5', type: 'audio', theme: 'Respiration', title: 'Cohérence cardiaque', min: 5 },
+    { id: 'l9', type: 'audio', theme: 'Respiration', title: 'Respiration réduite', min: 5 },
+    { id: 'l2', type: 'audio', theme: 'Sommeil', title: 'Détente avant le coucher', min: 10 },
+    { id: 'l6', type: 'video', theme: 'Sommeil', title: 'Ton rythme circadien', min: 9 },
+    { id: 'l3', type: 'audio', theme: 'Intéroception', title: 'Scan corporel guidé', min: 7 },
+    { id: 'l8', type: 'video', theme: 'Intéroception', title: 'Écouter les signaux du corps', min: 7 },
+    { id: 'l4', type: 'video', theme: 'Émotions', title: 'Comprendre ton stress', min: 6 },
+    { id: 'l7', type: 'audio', theme: 'Émotions', title: 'Accueillir une émotion', min: 6 }
+  ];
+  static PRACTICES = ['l5', 'l9', 'l2'];
+  static WATCH = 'l1';
+  static THEMES = {
+    'Sommeil': { bg: '#16012E', fg: '#D9C6FF' },
+    'Respiration': { bg: '#F0EBFF', fg: '#6300FF' },
+    'Intéroception': { bg: '#f5f0e8', fg: '#16012E' },
+    'Émotions': { bg: '#D9C6FF', fg: '#16012E' }
+  };
+  static METRICS = [
+    { k: 'bolt', name: 'BOLT', goal: 25, help: "Après une expiration normale, pince ton nez. Arrête le chrono à la première envie de respirer." },
+    { k: 'exp', name: 'Expiration max', goal: 45, help: "Inspire normalement, puis expire le plus lentement et le plus longtemps possible." },
+    { k: 'mbt', name: 'MBT', goal: 60, help: "Après une expiration normale, nez pincé, marche tranquillement le plus longtemps possible." }
+  ];
+
+  scrollRef = React.createRef();
+  state = this.load();
+
+  pad(n) { return String(n).padStart(2, '0'); }
+  dayKey(d = new Date()) { return `${d.getFullYear()}-${this.pad(d.getMonth() + 1)}-${this.pad(d.getDate())}`; }
+  prenom() { return this.props.prenom || 'Camille'; }
+  session() { return Math.min(8, Math.max(1, parseInt(this.props.session ?? 3, 10) || 3)); }
+  fmt(v) { return String(Math.round(v * 10) / 10).replace('.', ','); }
+  item(id) { return Component.LIB.find(x => x.id === id); }
+
+  load() {
+    const today = this.dayKey();
+    const empty = { date: today, sommeil: null, energie: null, anxiete: null, sent: false };
+    const def = {
+      tab: 'home', checkin: empty, libFilter: 'Tout',
+      history: [{ s: 3, e: 3, a: 5 }, { s: 4, e: 3, a: 5 }, { s: 3, e: 4, a: 4 }, { s: 5, e: 4, a: 4 }, { s: 4, e: 5, a: 3 }, { s: 5, e: 4, a: 4 }],
+      done: { date: today, ids: {} }, libDone: { l2: true },
+      scores: { bolt: [14, 17, null, null, null, null, null, null], exp: [28, 33, null, null, null, null, null, null], mbt: [38, 44, null, null, null, null, null, null] },
+      inputs: { bolt: '', exp: '', mbt: '' },
+      reminders: { morning: true, evening: true, consult: true }
+    };
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(Component.KEY)); } catch (e) {}
+    s = s ? { ...def, ...s } : def;
+    if (s.checkin.date !== today) {
+      const c = s.checkin;
+      if (c.sommeil && c.energie && c.anxiete) s.history = [...s.history, { s: c.sommeil, e: c.energie, a: c.anxiete }].slice(-6);
+      s.checkin = empty;
+    }
+    if (s.done.date !== today) s.done = def.done;
+    return { ...s, tab: this.props.initialTab || 'home', player: null, video: null, toast: null };
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      const p = this.state.player;
+      if (!p || !p.playing) return;
+      if (p.pos + 1 >= p.dur) this.finishAudio(p.id);
+      else this.setState({ player: { ...p, pos: p.pos + 1 } });
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.tt); }
+  componentDidUpdate() {
+    const { player, video, toast, ...rest } = this.state;
+    try { localStorage.setItem(Component.KEY, JSON.stringify(rest)); } catch (e) {}
+  }
+
+  send(sheet, row, msg) {
+    const url = Component.SHEET_ENDPOINT;
+    if (url) {
+      fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ sheet, row }) }).catch(() => {});
+    } else {
+      console.log('[SHEET simulé]', sheet, row);
+    }
+    if (msg) this.toast(msg);
+  }
+  toast(msg) {
+    clearTimeout(this.tt);
+    this.setState({ toast: msg });
+    this.tt = setTimeout(() => this.setState({ toast: null }), 2400);
+  }
+  setTab(tab) {
+    this.setState({ tab });
+    if (this.scrollRef.current) this.scrollRef.current.scrollTop = 0;
+  }
+
+  pick(key, n) {
+    const c = { ...this.state.checkin, [key]: n };
+    const complete = !!(c.sommeil && c.energie && c.anxiete);
+    const was = c.sent;
+    if (complete) c.sent = true;
+    this.setState({ checkin: c });
+    if (complete) this.send('Wellbeing', { date: c.date, prenom: this.prenom(), session: this.session(), sommeil: c.sommeil, energie: c.energie, anxiete: c.anxiete }, was ? 'Check-in mis à jour ✓' : 'Check-in envoyé ✓');
+  }
+
+  togglePractice(id, forceOn) {
+    const ids = { ...this.state.done.ids };
+    const on = forceOn || !ids[id];
+    if (on) ids[id] = true; else delete ids[id];
+    const libDone = { ...this.state.libDone };
+    if (on) libDone[id] = true;
+    this.setState({ done: { ...this.state.done, ids }, libDone });
+    if (on) {
+      const it = this.item(id);
+      this.send('Pratiques', { date: this.dayKey(), prenom: this.prenom(), session: this.session(), pratique: it.title, theme: it.theme, type: it.type, duree_min: it.min, statut: 'fait' }, 'Pratique enregistrée ✓');
+    }
+  }
+
+  play(id) {
+    const p = this.state.player;
+    if (p && p.id === id) { this.setState({ player: { ...p, playing: !p.playing } }); return; }
+    this.setState({ player: { id, pos: 0, dur: this.item(id).min * 60, playing: true } });
+  }
+  finishAudio(id) {
+    const p = this.state.player;
+    this.setState({ player: { ...p, pos: p.dur, playing: false } });
+    if (Component.PRACTICES.includes(id) && !this.state.done.ids[id]) this.togglePractice(id, true);
+    else { this.setState({ libDone: { ...this.state.libDone, [id]: true } }); this.toast('Audio terminé ✓'); }
+  }
+  openItem(it) {
+    if (it.type === 'video') this.setState({ video: it.id });
+    else this.play(it.id);
+  }
+  videoDone() {
+    const id = this.state.video;
+    const it = this.item(id);
+    const already = this.state.libDone[id];
+    this.setState({ video: null, libDone: { ...this.state.libDone, [id]: true } });
+    if (!already) this.send('Pratiques', { date: this.dayKey(), prenom: this.prenom(), session: this.session(), pratique: it.title, theme: it.theme, type: 'video', duree_min: it.min, statut: 'vu' }, 'Vidéo marquée comme vue ✓');
+  }
+
+  saveScores() {
+    const idx = this.session() - 1;
+    const inp = this.state.inputs;
+    const num = k => { const v = parseFloat(String(inp[k]).replace(',', '.')); return isFinite(v) && v > 0 ? Math.round(v * 10) / 10 : null; };
+    const vals = { bolt: num('bolt'), exp: num('exp'), mbt: num('mbt') };
+    if (vals.bolt == null && vals.exp == null && vals.mbt == null) { this.toast('Renseigne au moins un score'); return; }
+    const scores = {};
+    Object.keys(this.state.scores).forEach(k => { const a = [...this.state.scores[k]]; if (vals[k] != null) a[idx] = vals[k]; scores[k] = a; });
+    this.setState({ scores, inputs: { bolt: '', exp: '', mbt: '' } });
+    this.send('Scores & Prescriptions', { date: this.dayKey(), prenom: this.prenom(), session: this.session(), bolt: scores.bolt[idx], expiration_max: scores.exp[idx], mbt: scores.mbt[idx] }, 'Scores enregistrés ✓');
+  }
+
+  toggleReminder(k) {
+    const on = !this.state.reminders[k];
+    this.setState({ reminders: { ...this.state.reminders, [k]: on } });
+    this.toast(on ? 'Rappel activé ✓' : 'Rappel désactivé');
+  }
+
+  renderVals() {
+    const S = this.state;
+    const C = Component;
+    const variant = this.props.homeVariant ?? 'Crème';
+    const isEncre = variant === 'Encre';
+    const consultDay = this.props.consultDay ?? true;
+    const session = this.session();
+    const idx = session - 1;
+    const d = new Date();
+    const dl = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+    const theme = t => C.THEMES[t] || C.THEMES['Respiration'];
+
+    const lohi = { sommeil: ['très mauvais', 'excellent'], energie: ['à plat', 'pleine forme'], anxiete: ['serein·e', 'très anxieux·se'] };
+    const scales = [['sommeil', 'Sommeil'], ['energie', 'Énergie'], ['anxiete', 'Anxiété']].map(([key, label]) => {
+      const v = S.checkin[key];
+      return {
+        label, lo: lohi[key][0], hi: lohi[key][1], valTxt: v ? `${v}/7` : '—',
+        dots: [1, 2, 3, 4, 5, 6, 7].map(n => {
+          const on = v === n;
+          return { n, aria: `${label} ${n} sur 7`, onClick: () => this.pick(key, n), bg: on ? '#6300FF' : '#ffffff', fg: on ? '#ffffff' : '#16012E', bd: on ? '1px solid #6300FF' : '1px solid #e8e7e3', sh: on ? '0 0 0 4px rgba(99,0,255,0.15)' : 'none' };
+        })
+      };
+    });
+    const filled = ['sommeil', 'energie', 'anxiete'].filter(k => S.checkin[k]).length;
+    const sent = S.checkin.sent && filled === 3;
+
+    const playing = S.player && S.player.playing ? S.player.id : null;
+    const doneCount = C.PRACTICES.filter(id => S.done.ids[id]).length;
+    const practices = C.PRACTICES.map((id, i) => {
+      const it = this.item(id); const done = !!S.done.ids[id];
+      return {
+        title: it.title, meta: `Audio · ${it.min} min · ${it.theme}`, done,
+        sep: i ? '1px solid #e8e7e3' : 'none',
+        boxBg: done ? '#6300FF' : '#ffffff', boxBd: done ? '1.5px solid #6300FF' : '1.5px solid #d4d3d0',
+        titleColor: done ? '#555555' : '#16012E', deco: done ? 'line-through' : 'none',
+        isPlaying: playing === id, notPlaying: playing !== id,
+        onToggle: () => this.togglePractice(id), onPlay: () => this.play(id)
+      };
+    });
+    const w = this.item(C.WATCH);
+    const watch = { ...w, ...theme(w.theme), doneTxt: S.libDone[w.id] ? ' · vue ✓' : '' };
+
+    const charts = C.METRICS.map(m => {
+      const arr = S.scores[m.k];
+      let li = -1; arr.forEach((v, i) => { if (v != null) li = i; });
+      let pi = -1; for (let i = li - 1; i >= 0; i--) if (arr[i] != null) { pi = i; break; }
+      const max = Math.max(m.goal * 1.2, ...arr.filter(v => v != null)) * 1.12;
+      const delta = li >= 0 && pi >= 0 ? arr[li] - arr[pi] : null;
+      return {
+        name: m.name, goalTxt: `Objectif ${m.goal} s`,
+        latestTxt: li >= 0 ? this.fmt(arr[li]) : '—',
+        deltaTxt: delta == null ? 'Première mesure' : `${delta >= 0 ? '+' : '−'}${this.fmt(Math.abs(delta))} s vs S${pi + 1}`,
+        deltaBg: delta != null && delta < 0 ? '#f5f4f1' : '#F0EBFF', deltaFg: delta != null && delta < 0 ? '#555555' : '#4B00C2',
+        goalBottom: `${(m.goal / max) * 100}%`,
+        bars: arr.map((v, i) => ({
+          label: `S${i + 1}`, h: v != null ? `${(v / max) * 100}%` : '4px',
+          bg: i === li ? '#6300FF' : v != null ? '#D9C6FF' : '#e8e7e3',
+          val: i === li ? this.fmt(v) : '', lc: i === li ? '#16012E' : '#555555', lw: i === li ? 600 : 400
+        }))
+      };
+    });
+
+    const days = [];
+    for (let i = 6; i >= 0; i--) { const x = new Date(); x.setDate(x.getDate() - i); days.push(x.toLocaleDateString('fr-FR', { weekday: 'narrow' }).toUpperCase()); }
+    const hist = S.history.slice(-6); while (hist.length < 6) hist.unshift(null);
+    const feel = [['s', 'sommeil', 'Sommeil', ''], ['e', 'energie', 'Énergie', ''], ['a', 'anxiete', 'Anxiété', 'plus bas = mieux']].map(([k, key, label, note], fi) => {
+      const vals = [...hist.map(h => h ? h[k] : null), S.checkin[key]];
+      const ok = vals.filter(v => v);
+      return {
+        label, note, sep: fi ? '1px solid #e8e7e3' : 'none',
+        avg: ok.length ? this.fmt(ok.reduce((a, b) => a + b, 0) / ok.length) : '—',
+        bars: vals.map((v, i) => ({ h: v ? `${(v / 7) * 100}%` : '4px', bg: !v ? '#e8e7e3' : i === 6 ? '#6300FF' : '#D9C6FF', day: days[i], lc: i === 6 ? '#16012E' : '#555555', lw: i === 6 ? 600 : 400 }))
+      };
+    });
+
+    const scoreFields = C.METRICS.map(m => {
+      const prevArr = S.scores[m.k];
+      const cur = prevArr[idx];
+      let prev = ''; for (let i = idx - 1; i >= 0; i--) if (prevArr[i] != null) { prev = `S${i + 1} : ${this.fmt(prevArr[i])} s`; break; }
+      if (cur != null) prev = `Enregistré : ${this.fmt(cur)} s`;
+      return { label: m.name, help: m.help, prev, value: S.inputs[m.k], onChange: e => this.setState({ inputs: { ...this.state.inputs, [m.k]: e.target.value.replace(/[^0-9.,]/g, '') } }) };
+    });
+    const scoresSaved = ['bolt', 'exp', 'mbt'].some(k => S.scores[k][idx] != null);
+
+    const cats = ['Tout', 'Sommeil', 'Respiration', 'Intéroception', 'Émotions'];
+    const filters = cats.map(c => { const on = S.libFilter === c; return { label: c, onClick: () => this.setState({ libFilter: c }), bg: on ? '#16012E' : '#ffffff', fg: on ? '#faf9f5' : '#16012E', bd: on ? '1px solid #16012E' : '1px solid #e8e7e3' }; });
+    const libItems = C.LIB.filter(it => S.libFilter === 'Tout' || it.theme === S.libFilter).map(it => ({
+      ...it, ...theme(it.theme), isVideo: it.type === 'video', isAudio: it.type === 'audio', done: !!S.libDone[it.id],
+      meta: `${it.type === 'video' ? 'Vidéo' : 'Audio'} · ${it.min} min`, onOpen: () => this.openItem(it)
+    }));
+
+    const tabDefs = [
+      ['home', 'Accueil', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z'],
+      ['journal', 'Journal', 'M5 20V11M12 20V5M19 20v-6M3 20h18'],
+      ['library', 'Bibliothèque', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
+      ['profile', 'Profil', 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5']
+    ];
+    const tabs = tabDefs.map(([k, label, dd]) => ({ label, d: dd, color: S.tab === k ? '#6300FF' : '#555555', fw: S.tab === k ? 600 : 400, onClick: () => this.setTab(k) }));
+
+    const rem = [['morning', 'Check-in du matin', 'Chaque jour · 7:30'], ['evening', 'Pratique du soir', 'Chaque jour · 21:00'], ['consult', 'Veille de consultation', 'La veille · 18:00']];
+    const reminders = rem.map(([k, label, time], i) => { const on = !!S.reminders[k]; return { label, time, on, sep: i ? '1px solid #e8e7e3' : 'none', track: on ? '#6300FF' : '#d4d3d0', knob: on ? '22px' : '2px', onToggle: () => this.toggleReminder(k) }; });
+
+    const p = S.player;
+    const pit = p ? this.item(p.id) : null;
+    const mmss = s => `${Math.floor(s / 60)}:${this.pad(Math.floor(s % 60))}`;
+    const v = S.video ? this.item(S.video) : null;
+
+    return {
+      isHome: S.tab === 'home', isJournal: S.tab === 'journal', isLib: S.tab === 'library', isProfile: S.tab === 'profile',
+      isCreme: !isEncre, isEncre, darkStatus: isEncre && S.tab === 'home' && !v || !!v,
+      cardBg: '#ffffff', cardBorder: isEncre ? '1.5px solid #16012E' : '1px solid #e8e7e3',
+      scrollRef: this.scrollRef, scrollPad: `${83 + (p ? 80 : 0) + 28}px`,
+      dateLabel: dl.charAt(0).toUpperCase() + dl.slice(1), session, prenom: this.prenom(), initial: this.prenom().charAt(0).toUpperCase(),
+      objectif: this.props.objectif || 'Restaurer le sommeil + respiration fonctionnelle',
+      consultDay, notConsultDay: !consultDay,
+      goScores: () => this.setTab('journal'),
+      openSheet: () => window.open(C.SHEET_URL, '_blank', 'noopener'),
+      scales, ciStatus: sent ? 'Envoyé ✓' : `${filled}/3`, ciChipBg: sent ? '#F0EBFF' : '#f5f4f1', ciChipFg: sent ? '#4B00C2' : '#555555',
+      practices, practiceLabel: `${doneCount}/3`, practicePct: `${(doneCount / 3) * 100}%`,
+      watch, openWatch: () => this.openItem(w),
+      charts, feel, scoreFields, scoresSaved, saveScores: () => this.saveScores(),
+      scoresBorder: consultDay ? '1.5px solid #6300FF' : '1px solid #e8e7e3',
+      filters, libItems,
+      sessionDots: [1, 2, 3, 4, 5, 6, 7, 8].map(n => ({ bg: n < session ? '#D9C6FF' : n === session ? '#6300FF' : '#e8e7e3' })),
+      sessionsLeft: session >= 8 ? 'Dernière session' : `Encore ${8 - session} session${8 - session > 1 ? 's' : ''}`,
+      reminders, tabs,
+      playerShow: !!p, player: p ? { title: pit.title, time: `${mmss(p.pos)} / ${mmss(p.dur)} · ${pit.theme}`, pct: `${(p.pos / p.dur) * 100}%`, playing: p.playing, paused: !p.playing } : {},
+      playerToggle: () => this.play(p.id), playerClose: () => this.setState({ player: null }),
+      videoShow: !!v, video: v ? { ...v, cta: S.libDone[v.id] ? 'Fermer' : 'Marquer comme vue' } : {},
+      videoClose: () => this.setState({ video: null }), videoDone: () => this.videoDone(),
+      toastShow: !!S.toast, toastMsg: S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

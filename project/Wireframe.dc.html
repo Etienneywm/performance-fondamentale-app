@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap"><style>body{margin:0;background:#f0eee9;font-family:system-ui,sans-serif}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}</style></helmet>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Structure des 4 écrans — wireframe basse fidélité</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Accueil — Ma journée</div>
+<div class="dv-card" style="width:340px;border-radius:36px;border:2px solid #222;font-family:Kalam,cursive;color:#222">
+<div style="min-height:740px;display:flex;flex-direction:column">
+<div style="flex:1;padding:44px 18px 12px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:14px;color:#777">mar. 23 sept. · Session 3</div>
+<div style="font-size:26px;font-weight:700;line-height:1">Bonjour Camille</div>
+<div style="align-self:flex-start;border:1.5px solid #222;border-radius:99px;padding:4px 12px;font-size:14px">◎ Restaurer le sommeil + respiration</div>
+<div style="border:1.5px dashed #2a78d6;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:#eef4fc">
+<div style="font-size:15px">C'est le moment de mesurer tes scores</div>
+<div style="align-self:flex-start;background:#222;color:#fff;border-radius:8px;padding:6px 12px;font-size:14px">Remplir mes scores →</div>
+<div style="font-size:12px;color:#2a78d6">↑ seulement le jour de consultation</div>
+</div>
+<div style="border:1.5px solid #222;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700"><span>Check-in du matin</span><span style="font-weight:400;font-size:14px">2/3</span></div>
+<sc-for list="{{ scales }}" as="s" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:6px"><span style="width:62px;font-size:14px">{{ s.label }}</span><sc-for list="{{ dots }}" as="d" hint-placeholder-count="7"><span style="width:26px;height:26px;border:1.5px solid #222;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center">{{ d }}</span></sc-for></div></sc-for>
+<div style="border:1.5px solid #222;border-radius:8px;padding:5px;text-align:center;font-size:14px">Compléter mon journal de sommeil</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font-size:16px;font-weight:700">Tes pratiques du jour</div>
+<div style="height:6px;border:1.5px solid #222;border-radius:4px;position:relative"><div style="width:33%;height:100%;background:#222"></div></div>
+<sc-for list="{{ practices }}" as="p" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;border-bottom:1px dashed #aaa;padding:4px 0"><span style="width:20px;height:20px;border:1.5px solid #222;border-radius:5px"></span><div style="flex:1;line-height:1.1"><div style="font-size:14px">{{ p.t }}</div><div style="font-size:12px;color:#777">Audio · 5 min · {{ p.th }}</div></div><span style="width:30px;height:30px;border:1.5px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px">▶</span></div></sc-for>
+</div>
+<div style="font-size:16px;font-weight:700">À regarder</div>
+<div style="display:flex;gap:10px;align-items:center"><div style="width:120px;aspect-ratio:16/9;border:1.5px solid #222;border-radius:8px;background:repeating-linear-gradient(45deg,#eee 0 6px,#fff 6px 12px)"></div><div style="font-size:14px;line-height:1.2">Respiration · 8 min<br>Pourquoi respirer par le nez</div></div>
+</div>
+<div style="margin:0 10px;border:1.5px solid #222;border-radius:10px;padding:6px 10px;font-size:13px;display:flex;justify-content:space-between"><span>♪ Cohérence cardiaque</span><span>❚❚</span></div>
+<div style="display:flex;justify-content:space-around;padding:10px 0 22px;border-top:1.5px solid #222;margin-top:6px;font-size:13px"><b>Accueil</b><span>Journal</span><span>Biblio.</span><span>Profil</span></div>
+</div></div></div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Journal de suivi</div>
+<div class="dv-card" style="width:340px;border-radius:36px;border:2px solid #222;font-family:Kalam,cursive;color:#222">
+<div style="min-height:740px;display:flex;flex-direction:column">
+<div style="flex:1;padding:44px 18px 12px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:26px;font-weight:700;line-height:1">Journal</div>
+<div style="border:1.5px solid #222;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+<div style="font-size:16px;font-weight:700">Tes scores · session 3</div>
+<sc-for list="{{ scores }}" as="s" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;line-height:1.1"><div style="font-size:14px">{{ s.k }}</div><div style="font-size:12px;color:#777">{{ s.h }}</div></div><span style="width:70px;height:30px;border:1.5px solid #222;border-radius:6px;font-size:12px;color:#999;display:flex;align-items:center;justify-content:center">__ s</span></div></sc-for>
+<div style="background:#222;color:#fff;border-radius:8px;padding:6px;text-align:center;font-size:14px">Enregistrer mes scores</div>
+</div>
+<div style="font-size:16px;font-weight:700">Ta progression</div>
+<sc-for list="{{ charts }}" as="c" hint-placeholder-count="2"><div style="border:1.5px solid #222;border-radius:12px;padding:8px 12px"><div style="display:flex;justify-content:space-between;font-size:14px"><span>{{ c.k }}</span><span>{{ c.v }}</span></div><div style="position:relative;height:56px;display:flex;align-items:flex-end;gap:8px;margin-top:4px"><div style="position:absolute;left:0;right:0;top:10px;border-top:1.5px dashed #2a78d6"></div><sc-for list="{{ c.bars }}" as="b" hint-placeholder-count="8"><div style="flex:1;border:1.5px solid #222;border-radius:3px 3px 0 0;height:{{ b.h }};background:{{ b.bg }}"></div></sc-for></div><div style="font-size:11px;color:#777;display:flex;justify-content:space-between"><span>S1</span><span>S8</span></div></div></sc-for>
+<div style="font-size:16px;font-weight:700">Ton ressenti · 7 derniers jours</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><sc-for list="{{ feel }}" as="f" hint-placeholder-count="3"><div style="border:1.5px solid #222;border-radius:10px;padding:6px;font-size:12px;line-height:1.1">{{ f }}<div style="height:24px;border-bottom:1.5px solid #222;margin:4px 0;background:linear-gradient(to top right,transparent 48%,#222 49%,#222 52%,transparent 53%)"></div>moy. 4,6</div></sc-for></div>
+<div style="border:1.5px solid #222;border-radius:8px;padding:6px;text-align:center;font-size:14px">Journal de sommeil · Ouvrir dans Google Sheet ↗</div>
+</div>
+<div style="display:flex;justify-content:space-around;padding:10px 0 22px;border-top:1.5px solid #222;font-size:13px"><span>Accueil</span><b>Journal</b><span>Biblio.</span><span>Profil</span></div>
+</div></div></div>
+
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Bibliothèque</div>
+<div class="dv-card" style="width:340px;border-radius:36px;border:2px solid #222;font-family:Kalam,cursive;color:#222">
+<div style="min-height:740px;display:flex;flex-direction:column">
+<div style="flex:1;padding:44px 18px 12px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:26px;font-weight:700;line-height:1">Bibliothèque</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="5"><span style="border:1.5px solid #222;border-radius:99px;padding:3px 10px;font-size:13px">{{ f }}</span></sc-for></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><sc-for list="{{ lib }}" as="l" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:3px"><div style="aspect-ratio:16/11;border:1.5px solid #222;border-radius:10px;background:repeating-linear-gradient(45deg,#eee 0 6px,#fff 6px 12px);display:flex;align-items:center;justify-content:center;font-size:14px">{{ l.icon }}</div><div style="font-size:11px;color:#777">{{ l.th }}</div><div style="font-size:14px;line-height:1.1">{{ l.t }}</div><div style="font-size:12px;color:#777">{{ l.m }}</div></div></sc-for></div>
+<div style="font-size:12px;color:#2a78d6">vidéo → plein écran · audio → mini-lecteur</div>
+</div>
+<div style="display:flex;justify-content:space-around;padding:10px 0 22px;border-top:1.5px solid #222;font-size:13px"><span>Accueil</span><span>Journal</span><b>Biblio.</b><span>Profil</span></div>
+</div></div></div>
+
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Profil</div>
+<div class="dv-card" style="width:340px;border-radius:36px;border:2px solid #222;font-family:Kalam,cursive;color:#222">
+<div style="min-height:740px;display:flex;flex-direction:column">
+<div style="flex:1;padding:44px 18px 12px;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:10px"><div style="width:80px;height:80px;border:2px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px">C</div><div style="font-size:24px;font-weight:700">Camille</div><div style="font-size:14px;color:#777">Session 3/8</div></div>
+<div style="border:1.5px solid #222;border-radius:12px;padding:10px 12px;font-size:14px">● Tableau de suivi : Google Sheet connecté</div>
+<div style="font-size:16px;font-weight:700">Rappels</div>
+<sc-for list="{{ reminders }}" as="r" hint-placeholder-count="3"><div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px dashed #aaa;padding:6px 0"><div style="line-height:1.1"><div style="font-size:14px">{{ r.t }}</div><div style="font-size:12px;color:#777">{{ r.h }}</div></div><span style="width:40px;height:22px;border:1.5px solid #222;border-radius:99px;position:relative"><span style="position:absolute;right:2px;top:2px;width:15px;height:15px;background:#222;border-radius:50%"></span></span></div></sc-for>
+</div>
+<div style="display:flex;justify-content:space-around;padding:10px 0 22px;border-top:1.5px solid #222;font-size:13px"><span>Accueil</span><span>Journal</span><span>Biblio.</span><b>Profil</b></div>
+</div></div></div>
+
+</div>
+<p class="dv-next">À toi : « OK pour la structure » · « déplace le check-in sous les pratiques » · « ajoute X au profil » — puis colle ton CSS pour le prototype.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const h = [30, 38, 45, 0, 0, 0, 0, 0];
+    const bars = (arr) => arr.map((v, i) => ({ h: v ? v + '%' : '4%', bg: i === 2 ? '#222' : 'transparent' }));
+    return {
+      scales: [{ label: 'Sommeil' }, { label: 'Énergie' }, { label: 'Anxiété' }],
+      dots: [1, 2, 3, 4, 5, 6, 7],
+      practices: [{ t: 'Cohérence cardiaque', th: 'Respiration' }, { t: 'Scan corporel', th: 'Intéroception' }, { t: 'Respiration lente du soir', th: 'Sommeil' }],
+      scores: [{ k: 'BOLT', h: 'Pause après expiration normale' }, { k: 'Expiration max', h: 'Expire le plus longtemps possible' }, { k: 'MBT', h: 'Marche en apnée, en pas → s' }],
+      charts: [{ k: 'BOLT', v: '22 s · +4', bars: bars(h) }, { k: 'MBT', v: '48 s · +6', bars: bars([40, 52, 64, 0, 0, 0, 0, 0]) }],
+      feel: ['Sommeil', 'Énergie', 'Anxiété'],
+      filters: ['Tout', 'Sommeil', 'Respiration', 'Intéroception', 'Émotions'],
+      lib: [
+        { icon: '▶', th: 'Respiration', t: 'Respirer par le nez', m: 'Vidéo · 8 min' },
+        { icon: '♪', th: 'Sommeil', t: 'Détente du soir', m: 'Audio · 10 min · fait ✓' },
+        { icon: '♪', th: 'Intéroception', t: 'Scan corporel', m: 'Audio · 7 min' },
+        { icon: '▶', th: 'Émotions', t: 'Le stress, allié ?', m: 'Vidéo · 6 min' },
+        { icon: '♪', th: 'Respiration', t: 'Cohérence cardiaque', m: 'Audio · 5 min · fait ✓' },
+        { icon: '▶', th: 'Sommeil', t: 'Ton rythme circadien', m: 'Vidéo · 9 min' }
+      ],
+      reminders: [{ t: 'Check-in du matin', h: '7:30' }, { t: 'Pratique du soir', h: '21:00' }, { t: 'Veille de consultation', h: '18:00' }]
+    };
+  }
+}
+</script>
+</body>
+</html>
