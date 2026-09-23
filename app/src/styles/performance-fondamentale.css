@@ -1,0 +1,234 @@
+/* ============================================================
+   Performance Fondamentale — design system (CSS)
+   Source : Etienneywm/FH@7989528 (index.html). Copier-coller tel quel.
+   Tout est préfixé --pf- / .pf- pour ne pas entrer en conflit avec l'app.
+   ============================================================ */
+
+:root {
+  /* Couleurs */
+  --pf-cream: #faf9f5;
+  --pf-cream-2: #f5f4f1;
+  --pf-cream-3: #f5f0e8;
+  --pf-surface-card: #ffffff;
+  --pf-ink: #16012E;
+  --pf-ink-gradient-top: #1E0838;
+  --pf-violet: #6300FF;
+  --pf-violet-dark: #4B00C2;
+  --pf-violet-pale: #F0EBFF;
+  --pf-violet-soft: #D9C6FF;
+  --pf-on-violet: #ffffff;
+  --pf-text-strong: #333333;
+  --pf-text-body: #555555;
+  --pf-text-answer: #666666;
+  --pf-text-muted: #999999;
+  --pf-text-placeholder: #bbbbbb;
+  --pf-text-readmore: #5b564e;
+  --pf-text-dotnav: #8c857a;
+  --pf-text-on-ink: #BDB3D0;
+  --pf-text-footer: #9b8fb3;
+  --pf-line-footer: #4B2E7A;
+  --pf-hairline: #e8e7e3;
+  --pf-hairline-warm: #e6e2d8;
+  --pf-dot-inactive: #d4d3d0;
+  --pf-error: #a3392b;
+  --pf-header-glass: rgba(250, 249, 245, 0.8);
+  --pf-line-on-ink: rgba(250, 249, 245, 0.25);
+
+  /* Polices */
+  --pf-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --pf-font-quote: Georgia, serif;
+
+  /* Espacements */
+  --pf-space-4: 4px;
+  --pf-space-8: 8px;
+  --pf-space-12: 12px;
+  --pf-space-14: 14px;
+  --pf-space-16: 16px;
+  --pf-space-20: 20px;
+  --pf-space-24: 24px;
+  --pf-space-28: 28px;
+  --pf-space-30: 30px;
+  --pf-space-36: 36px;
+  --pf-space-40: 40px;
+  --pf-space-44: 44px;
+  --pf-space-48: 48px;
+  --pf-space-56: 56px;
+  --pf-space-64: 64px;
+  --pf-space-section: 80px;
+
+  /* Rayons */
+  --pf-radius-dot: 4px;
+  --pf-radius-field: 10px;
+  --pf-radius-cert: 14px;
+  --pf-radius-offer: 16px;
+  --pf-radius-card: 20px;
+  --pf-radius-pill: 100px;
+  --pf-radius-circle: 50%;
+
+  /* Ombres */
+  --pf-shadow-cta-hover: 0 8px 24px rgba(99, 0, 255, 0.22);
+  --pf-shadow-bridge: 0 8px 24px rgba(99, 0, 255, 0.25);
+  --pf-shadow-card-hover: 0 4px 16px rgba(99, 0, 255, 0.10);
+  --pf-shadow-photo: 0 20px 60px rgba(22, 1, 46, 0.15);
+  --pf-shadow-video: 0 8px 40px rgba(22, 1, 46, 0.12);
+  --pf-shadow-offer: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --pf-shadow-focus: 0 0 0 3px rgba(99, 0, 255, 0.10);
+  --pf-shadow-dot-active: 0 0 0 4px rgba(99, 0, 255, 0.15);
+  --pf-shadow-phase-active: 0 0 34px rgba(99, 0, 255, 0.55);
+
+  /* Bordures */
+  --pf-border-hairline: 1px;
+  --pf-border-strong: 1.5px;
+  --pf-border-accent: 2px;
+  --pf-border-top-accent: 3px;
+
+  /* Mise en page */
+  --pf-container-max: 1200px;
+  --pf-measure: 700px;
+  --pf-measure-form: 640px;
+  --pf-layout-narrow: 1100px;
+
+  /* Mouvement */
+  --pf-ease: ease;
+  --pf-duration: 0.25s;
+  --pf-ease-carousel: cubic-bezier(0.65, 0.02, 0.18, 1);
+}
+
+/* ---------- Styles de texte ---------- */
+.pf-text-display { font-family: var(--pf-font-sans); font-size: 64px; line-height: 1.2; font-weight: 300; letter-spacing: -1px; color: var(--pf-ink); }
+.pf-text-h2 { font-family: var(--pf-font-sans); font-size: 48px; line-height: 1.2; font-weight: 300; letter-spacing: -0.5px; color: var(--pf-ink); }
+.pf-text-h2-section { font-family: var(--pf-font-sans); font-size: 36px; line-height: 1.2; font-weight: 300; letter-spacing: -0.5px; color: var(--pf-ink); }
+.pf-text-impact { font-family: var(--pf-font-sans); font-size: 54px; line-height: 1.15; font-weight: 500; letter-spacing: -0.5px; text-transform: uppercase; color: var(--pf-ink); }
+.pf-text-h3-detail { font-family: var(--pf-font-sans); font-size: 32px; line-height: 1.3; font-weight: 400; letter-spacing: 0.5px; color: var(--pf-ink); }
+.pf-text-h3-offer { font-family: var(--pf-font-sans); font-size: 28px; line-height: 1.3; font-weight: 400; color: var(--pf-ink); }
+.pf-text-h3-card { font-family: var(--pf-font-sans); font-size: 19px; line-height: 1.3; font-weight: 600; color: var(--pf-ink); }
+.pf-text-price { font-family: var(--pf-font-sans); font-size: 54px; line-height: 1.1; font-weight: 300; letter-spacing: -2px; color: var(--pf-ink); }
+.pf-text-stat { font-family: var(--pf-font-sans); font-size: 42px; line-height: 1.1; font-weight: 300; letter-spacing: -1px; color: var(--pf-violet); }
+.pf-text-statement { font-family: var(--pf-font-sans); font-size: 24px; line-height: 1.5; font-weight: 300; color: var(--pf-ink); }
+.pf-text-lead { font-family: var(--pf-font-sans); font-size: 18px; line-height: 1.8; font-weight: 500; color: var(--pf-text-strong); }
+.pf-text-body { font-family: var(--pf-font-sans); font-size: 18px; line-height: 1.8; font-weight: 300; color: var(--pf-text-body); }
+.pf-text-body-16 { font-family: var(--pf-font-sans); font-size: 16px; line-height: 1.9; font-weight: 300; color: var(--pf-text-body); }
+.pf-text-quote { font-family: var(--pf-font-sans); font-size: 21px; line-height: 1.65; font-weight: 300; letter-spacing: -0.3px; color: var(--pf-ink); }
+.pf-text-pull-quote { font-family: var(--pf-font-sans); font-size: 20px; line-height: 1.6; font-weight: 300; letter-spacing: -0.3px; font-style: italic; color: var(--pf-ink); }
+.pf-text-faq-question { font-family: var(--pf-font-sans); font-size: 17px; line-height: 1.5; font-weight: 500; color: var(--pf-ink); }
+.pf-text-small { font-family: var(--pf-font-sans); font-size: 14.5px; line-height: 1.7; font-weight: 300; color: var(--pf-text-body); }
+.pf-text-kicker { font-family: var(--pf-font-sans); font-size: 12px; line-height: 1.6; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--pf-violet); }
+.pf-text-logo { font-family: var(--pf-font-sans); font-size: 14px; line-height: 1.6; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--pf-ink); }
+.pf-text-button { font-family: var(--pf-font-sans); font-size: 14px; line-height: 1.6; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--pf-ink); }
+.pf-text-label { font-family: var(--pf-font-sans); font-size: 12px; line-height: 1.6; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pf-text-muted); }
+.pf-text-eyebrow-small { font-family: var(--pf-font-sans); font-size: 11px; line-height: 1.6; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--pf-violet); }
+.pf-text-quote-mark { font-family: var(--pf-font-quote); font-size: 64px; line-height: 0.5; font-weight: 400; color: var(--pf-violet-soft); }
+
+/* ---------- Base (optionnel : ajouter class="pf-root" sur <body>) ---------- */
+.pf-root { font-family: var(--pf-font-sans); background: var(--pf-cream); color: var(--pf-ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.pf-root *, .pf-root *::before, .pf-root *::after { box-sizing: border-box; }
+.pf-container { max-width: var(--pf-container-max); margin: 0 auto; padding: 0 var(--pf-space-40); }
+.pf-section { padding: var(--pf-space-section) 0; }
+.pf-section--cream   { background: var(--pf-cream); }
+.pf-section--cream-2 { background: var(--pf-cream-2); }
+.pf-section--warm    { background: var(--pf-cream-3); }
+.pf-section--ink     { background: var(--pf-ink); color: var(--pf-cream); }
+.pf-section--ink-gradient { background: linear-gradient(180deg, var(--pf-ink-gradient-top) 0%, var(--pf-ink) 100%); color: var(--pf-cream); }
+.pf-measure { max-width: var(--pf-measure); }
+.pf-strong { color: var(--pf-ink); font-weight: 500; }
+.pf-accent { color: var(--pf-violet); }
+.pf-on-ink { color: var(--pf-text-on-ink); }
+@media (max-width: 1024px) {
+  .pf-container { padding: 0 var(--pf-space-30); }
+  .pf-text-display { font-size: 48px; } .pf-text-h2 { font-size: 36px; }
+}
+@media (max-width: 768px) {
+  .pf-container { padding: 0 var(--pf-space-20); }
+  .pf-text-display { font-size: 36px; } .pf-text-h2 { font-size: 28px; } .pf-text-body { font-size: 16px; }
+  .pf-text-impact { font-size: 32px; }
+}
+
+/* ---------- Bouton ---------- */
+.pf-btn {
+  display: inline-block; padding: 14px 38px; border: none; cursor: pointer;
+  background: var(--pf-violet); color: var(--pf-on-violet);
+  font-family: inherit; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;
+  text-decoration: none; border-radius: var(--pf-radius-pill);
+  transition: background var(--pf-duration) var(--pf-ease), transform var(--pf-duration) var(--pf-ease), box-shadow var(--pf-duration) var(--pf-ease);
+}
+.pf-btn:hover { background: var(--pf-violet-dark); transform: translateY(-1px); box-shadow: var(--pf-shadow-cta-hover); }
+.pf-btn:focus-visible { outline: var(--pf-border-accent) solid var(--pf-violet); outline-offset: 3px; }
+.pf-btn--small { padding: 10px 24px; font-size: 12px; }
+.pf-btn--ink { background: var(--pf-ink); color: var(--pf-cream); text-transform: none; letter-spacing: 0; font-weight: 400; }
+.pf-btn--ink:hover { background: var(--pf-ink); opacity: .85; box-shadow: none; }
+
+/* ---------- Kicker / logotype ---------- */
+.pf-kicker { font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--pf-violet); margin: 0 0 var(--pf-space-12); }
+.pf-logo { font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--pf-ink); text-decoration: none; }
+.pf-logo__accent { color: var(--pf-violet); }
+.pf-logo__by { display: block; margin-top: 4px; font-size: 11px; letter-spacing: 1px; color: var(--pf-text-muted); }
+
+/* ---------- Header ---------- */
+.pf-header { position: sticky; top: 0; z-index: 100; padding: 20px var(--pf-space-40); background: var(--pf-header-glass); backdrop-filter: blur(10px); border-bottom: var(--pf-border-hairline) solid var(--pf-hairline); }
+.pf-header__inner { max-width: var(--pf-container-max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.pf-header__nav { display: flex; gap: var(--pf-space-28); align-items: center; }
+.pf-header__link { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pf-text-muted); text-decoration: none; transition: color .2s; }
+.pf-header__link:hover { color: var(--pf-violet); }
+
+/* ---------- Cartes ---------- */
+.pf-card { background: var(--pf-surface-card); border: var(--pf-border-hairline) solid var(--pf-hairline); border-radius: var(--pf-radius-card); padding: var(--pf-space-40); transition: all .3s var(--pf-ease); }
+.pf-card:hover { border-color: var(--pf-violet); box-shadow: var(--pf-shadow-card-hover); }
+.pf-card--outline { background: none; border: var(--pf-border-strong) solid var(--pf-ink); padding: clamp(28px, 4vw, 48px); }
+.pf-card--outline:hover { border-color: var(--pf-ink); box-shadow: none; }
+.pf-card--accent { background: var(--pf-violet-pale); border: none; border-radius: var(--pf-radius-offer); padding: 36px 28px; }
+
+/* Icône cerclée (mettre un <svg stroke="currentColor"> dedans) */
+.pf-icon-circle { width: 72px; height: 72px; border: var(--pf-border-strong) solid var(--pf-violet); border-radius: var(--pf-radius-circle); display: flex; align-items: center; justify-content: center; color: var(--pf-violet); }
+.pf-icon-circle svg { width: 30px; height: 30px; }
+
+/* Carte offre / tarif */
+.pf-offer { background: var(--pf-cream); border-top: var(--pf-border-top-accent) solid var(--pf-violet); border-radius: var(--pf-radius-card); padding: var(--pf-space-48); box-shadow: var(--pf-shadow-offer); }
+.pf-offer__price { font-size: 54px; font-weight: 300; letter-spacing: -2px; line-height: 1.1; color: var(--pf-ink); }
+.pf-list-dash { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--pf-space-14); }
+.pf-list-dash li { display: flex; gap: var(--pf-space-12); font-size: 15px; color: var(--pf-text-body); }
+.pf-list-dash li::before { content: "—"; color: var(--pf-violet); flex-shrink: 0; }
+
+/* Chiffres clés */
+.pf-stat__num { display: block; font-size: 42px; font-weight: 300; letter-spacing: -1px; line-height: 1.1; color: var(--pf-violet); }
+.pf-stat__label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pf-text-body); }
+
+/* Citation */
+.pf-pull-quote { border-left: var(--pf-border-accent) solid var(--pf-violet); padding: 6px 0 6px 22px; margin: var(--pf-space-24) 0; font-size: 20px; font-weight: 300; font-style: italic; letter-spacing: -0.3px; color: var(--pf-ink); }
+
+/* Témoignage */
+.pf-testimonial { text-align: center; }
+.pf-testimonial__mark { display: block; font-family: var(--pf-font-quote); font-size: 64px; line-height: .5; color: var(--pf-violet-soft); margin-bottom: var(--pf-space-24); }
+.pf-testimonial__quote { font-size: clamp(16px, 1.6vw, 21px); font-weight: 300; line-height: 1.65; letter-spacing: -0.3px; color: var(--pf-ink); max-width: 540px; margin: 0 auto 28px; }
+.pf-testimonial__name { display: block; font-size: 15px; font-weight: 500; color: var(--pf-ink); }
+.pf-testimonial__role { display: block; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pf-violet); }
+
+/* Pastilles (carrousel) */
+.pf-dot { width: 7px; height: 7px; border: none; padding: 0; border-radius: var(--pf-radius-circle); background: var(--pf-dot-inactive); cursor: pointer; transition: all .3s var(--pf-ease); }
+.pf-dot.is-active { width: 22px; border-radius: var(--pf-radius-dot); background: var(--pf-violet); }
+.pf-round-btn { width: 44px; height: 44px; border-radius: var(--pf-radius-circle); border: var(--pf-border-hairline) solid var(--pf-hairline); background: none; color: var(--pf-ink); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color .3s; }
+.pf-round-btn:hover { border-color: var(--pf-violet); color: var(--pf-violet); }
+
+/* ---------- Formulaire ---------- */
+.pf-field { display: flex; flex-direction: column; margin-bottom: var(--pf-space-20); }
+.pf-field label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--pf-text-muted); margin-bottom: var(--pf-space-8); }
+.pf-input { width: 100%; font-family: inherit; font-size: 16px; font-weight: 300; color: var(--pf-ink); background: var(--pf-cream); border: var(--pf-border-hairline) solid var(--pf-hairline); border-radius: var(--pf-radius-field); padding: 13px 14px; transition: border-color .25s, box-shadow .25s; }
+.pf-input::placeholder { color: var(--pf-text-placeholder); }
+.pf-input:focus { outline: none; border-color: var(--pf-violet); box-shadow: var(--pf-shadow-focus); }
+.pf-form-error { font-size: 14px; color: var(--pf-error); }
+
+/* ---------- FAQ (<details class="pf-faq">) ---------- */
+.pf-faq { border-bottom: var(--pf-border-hairline) solid var(--pf-hairline); padding: var(--pf-space-24) 0; }
+.pf-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 17px; font-weight: 500; color: var(--pf-ink); }
+.pf-faq summary::-webkit-details-marker { display: none; }
+.pf-faq summary::after { content: "+"; font-size: 22px; font-weight: 300; color: var(--pf-violet); margin-left: var(--pf-space-16); }
+.pf-faq[open] summary::after { content: "−"; }
+.pf-faq p { margin: var(--pf-space-16) 0 0; font-size: 15px; line-height: 1.8; color: var(--pf-text-answer); }
+
+/* ---------- Footer ---------- */
+.pf-footer { background: var(--pf-ink); color: var(--pf-text-footer); padding: var(--pf-space-40); text-align: center; }
+.pf-footer a { color: var(--pf-cream); text-decoration: none; border-bottom: var(--pf-border-hairline) solid var(--pf-line-footer); transition: border-color .3s; }
+.pf-footer a:hover { border-color: var(--pf-violet-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-btn, .pf-card, .pf-dot, .pf-round-btn, .pf-input { transition: none; }
+}
